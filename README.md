@@ -34,3 +34,17 @@ You can check out [the Next.js GitHub repository](https://github.com/vercel/next
 The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
 
 Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+
+## Online zetten
+
+De site is build-klaar voor Vercel. Gebruik deze stappen:
+
+1. Zet het project in een GitHub-repository.
+2. Import die repository in Vercel.
+3. Voeg in Vercel de environment variables toe:
+	- `EMAIL_USER`
+	- `EMAIL_PASS`
+	- `EMAIL_TO` is optioneel; als je die niet zet, gebruikt de site `EMAIL_USER`.
+4. Deploy het project.
+
+Gebruik `.env.example` als basis voor lokale configuratie.
