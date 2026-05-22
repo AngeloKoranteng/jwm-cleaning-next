@@ -13,12 +13,17 @@ export async function POST(req: Request) {
     }
 
     const transporter = nodemailer.createTransport({
-      service: 'gmail',
+      host: 'smtp.gmail.com',
+      port: 465,
+      secure: true,
       auth: {
         user: process.env.EMAIL_USER,
         pass: process.env.EMAIL_PASS,
       },
     });
+
+    // Verify connection configuration early so errors show in logs
+    await transporter.verify();
 
     const mailOptions = {
       from: process.env.EMAIL_USER,
@@ -97,9 +102,10 @@ export async function POST(req: Request) {
     return NextResponse.json({ message: 'Email sent successfully' }, { status: 200 });
   } catch (error) {
     console.error('Email error:', error);
-    return NextResponse.json(
-      { message: 'Failed to send email' },
-      { status: 500 }
-    );
+    // Include the error message in the JSON when not in production to help debugging
+    const isProd = process.env.NODE_ENV === 'production';
+    const body: any = { message: 'Failed to send email' };
+    if (!isProd && error instanceof Error) body.error = error.message;
+    return NextResponse.json(body, { status: 500 });
   }
 }
