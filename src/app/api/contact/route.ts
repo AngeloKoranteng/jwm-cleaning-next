@@ -5,6 +5,9 @@ export async function POST(req: Request) {
   try {
     const { name, email, service, message } = await req.json();
 
+    // Log incoming request (helps debugging on production — safe: no secrets)
+    console.log('Contact request received', { name, email, service });
+
     if (!name || !email || !service || !message) {
       return NextResponse.json(
         { message: 'Missing required fields' },
@@ -23,7 +26,12 @@ export async function POST(req: Request) {
     });
 
     // Verify connection configuration early so errors show in logs
-    await transporter.verify();
+    try {
+      await transporter.verify();
+    } catch (verifyError) {
+      console.error('SMTP verify failed:', verifyError);
+      throw verifyError;
+    }
 
     const mailOptions = {
       from: process.env.EMAIL_USER,
@@ -101,7 +109,9 @@ export async function POST(req: Request) {
 
     return NextResponse.json({ message: 'Email sent successfully' }, { status: 200 });
   } catch (error) {
-    console.error('Email error:', error);
+    // Log full error stack for debugging (do not log sensitive env vars)
+    if (error instanceof Error) console.error('Email error:', error.stack || error.message);
+    else console.error('Email error (non-error):', error);
     // Include the error message in the JSON when not in production to help debugging
     const isProd = process.env.NODE_ENV === 'production';
     const body: any = { message: 'Failed to send email' };
