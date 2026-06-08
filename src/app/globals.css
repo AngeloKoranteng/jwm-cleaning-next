@@ -428,7 +428,17 @@ nav {
 }
 
 @media (max-width: 640px) {
-    .siev-badge { display: none; }
+    .siev-badge {
+        display: block;
+        bottom: 12px;
+        right: 12px;
+        opacity: 0.85;
+        box-shadow: 0 6px 18px rgba(0,0,0,0.10);
+    }
+    .siev-badge img {
+        width: 64px;
+        height: auto;
+    }
 }
 
 .gallery-item {
