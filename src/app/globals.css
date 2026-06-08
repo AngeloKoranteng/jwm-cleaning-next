@@ -402,6 +402,35 @@ nav {
     gap: 20px;
 }
 
+/* SIEV badge (bottom-right) */
+.siev-badge {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    z-index: 2000;
+    display: block;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 8px 30px rgba(0,0,0,0.12);
+    transition: transform 0.18s ease, opacity 0.18s ease;
+    opacity: 0.95;
+}
+.siev-badge img {
+    display: block;
+    width: 120px;
+    height: auto;
+    object-fit: contain;
+    background: white;
+}
+.siev-badge:hover {
+    transform: translateY(-4px);
+    opacity: 1;
+}
+
+@media (max-width: 640px) {
+    .siev-badge { display: none; }
+}
+
 .gallery-item {
     overflow: hidden;
     border-radius: 8px;

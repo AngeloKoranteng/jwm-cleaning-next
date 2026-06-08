@@ -21,6 +21,15 @@ export default function RootLayout({
       <body>
         <Navbar />
         {children}
+        <a
+          href="https://siev.nl/"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="siev-badge"
+          aria-label="SIEV keurmerk - opent in nieuw venster"
+        >
+          <img src="/siev-badge.jpeg" alt="SIEV keurmerk" />
+        </a>
       </body>
     </html>
   );
