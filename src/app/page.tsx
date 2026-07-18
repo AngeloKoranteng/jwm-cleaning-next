@@ -116,7 +116,7 @@ export default function Home() {
               </div>
               <div className="info-item">
                 <i className="fas fa-phone"></i>
-                <span>+31 6 39 26 84 67</span>
+                <a href="tel:+31686122565">0686122565</a>
               </div>
               <div className="info-item">
                 <i className="fas fa-map-marker-alt"></i>
